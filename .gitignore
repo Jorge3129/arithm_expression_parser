@@ -1,0 +1,12 @@
+*.class
+.gradle
+/build/
+
+*.jar
+*.war
+*.ear
+
+!gradle-wrapper.jar
+
+.idea
+java_prolog_parser/.idea
