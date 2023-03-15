@@ -1,4 +1,4 @@
-package com.sanchenko.monad_parser;
+package com.sanchenko.monadic_parser;
 
 import com.sanchenko.exp.*;
 import org.javafp.parsecj.Parser;
@@ -7,12 +7,12 @@ import org.javafp.parsecj.input.Input;
 import java.util.List;
 import java.util.function.BinaryOperator;
 
-import static com.sanchenko.monad_parser.ParserUtils.*;
-import static com.sanchenko.monad_parser.ParserUtils.lexem;
+import static com.sanchenko.monadic_parser.ParserUtils.*;
+import static com.sanchenko.monadic_parser.ParserUtils.lexem;
 import static org.javafp.parsecj.Combinators.*;
 import static org.javafp.parsecj.Text.string;
 
-public class ExpressionParser {
+public class MonadicParser {
 
    public static Parser.Ref<Character, Exp> exprP = Parser.ref();
 

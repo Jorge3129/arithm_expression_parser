@@ -1,4 +1,4 @@
-package com.sanchenko.monad_parser;
+package com.sanchenko.monadic_parser;
 
 import org.javafp.data.IList;
 import org.javafp.parsecj.*;
