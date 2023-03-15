@@ -67,7 +67,7 @@ callArgs = parens ((lexem expr) `sepBy` (reserved ","))
 -- Operations
 addop, mulop :: Parser (Exp -> Exp -> Exp)
 addop = binOp "+" (BinOp Add) <|> (binOp "-"(BinOp Minus))
-mulop = binOp "*"(BinOp Mul) <|> (binOp "/"(BinOp Minus))
+mulop = binOp "*"(BinOp Mul) <|> (binOp "/"(BinOp Div))
 
 -- Expressions
 expr, term, factor :: Parser Exp
