@@ -2,6 +2,7 @@
 .gradle
 /build/
 
+
 *.jar
 *.war
 *.ear
@@ -10,3 +11,4 @@
 
 .idea
 java_prolog_parser/.idea
+java_prolog_parser/build
