@@ -13,13 +13,13 @@ digits([D|T]) --> [D], { code_type(D, digit) }, digits(T).
 digits([]) --> [].
 
 % identifier parsing util
-ident([C|Cs]) --> upper(C), alpha_numeric(Cs).
+ident([C|Cs]) --> firstLetter(C), nextLetter(Cs).
 
-upper(C) --> [C], { code_type(C, upper) }.
-upper(C) --> [C], { code_type(C, alpha) }.
+firstLetter(C) --> [C], { code_type(C, upper) }.
+firstLetter(C) --> [C], { code_type(C, alpha) }.
 
-alpha_numeric([C|Cs]) --> [C], { code_type(C, alnum) ; C = 95 }, alpha_numeric(Cs).
-alpha_numeric([]) --> [].
+nextLetter([C|Cs]) --> [C], { code_type(C, alnum) ; C = 95 }, nextLetter(Cs).
+nextLetter([]) --> [].
 
 %  number literal node
 number(num(N)) --> parseInt(N), spaces.
