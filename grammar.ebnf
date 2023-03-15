@@ -1,0 +1,15 @@
+expression    = term { addop term };
+term          = factor { mulop factor };
+factor        = number | variable | function | "(" expression ")";
+variable      = letter { letter | digit | "_" };
+function      = ident "(" expression ")";
+
+addop         = "+" | "-";
+mulop         = "*" | "/";
+
+number        =  digit {digit};
+
+ident         = letter { letter | digit | "_" };
+
+letter        = "A" | "B" | ... | "Z" | "a" | "b" | ... | "z";
+digit         = "0" | "1" | ... | "9"
