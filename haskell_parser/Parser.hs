@@ -54,11 +54,7 @@ identParser = do
   st <- lexem ident
   return (Var st)
 
--- Operations
-addop, mulop :: Parser (Exp -> Exp -> Exp)
-addop = binOp "+" (BinOp Add) <|> (binOp "-"(BinOp Minus))
-mulop = binOp "*"(BinOp Mul) <|> (binOp "/"(BinOp Minus))
-
+-- Function application node
 funcApp :: Parser Exp
 funcApp = do
   nm <- lexem ident
@@ -67,6 +63,11 @@ funcApp = do
 
 callArgs :: Parser [Exp]
 callArgs = parens ((lexem expr) `sepBy` (reserved ","))
+
+-- Operations
+addop, mulop :: Parser (Exp -> Exp -> Exp)
+addop = binOp "+" (BinOp Add) <|> (binOp "-"(BinOp Minus))
+mulop = binOp "*"(BinOp Mul) <|> (binOp "/"(BinOp Minus))
 
 -- Expressions
 expr, term, factor :: Parser Exp
