@@ -1,6 +1,6 @@
 % optionally many spaces
-spaces --> [].
 spaces --> [' '], spaces.
+spaces --> [].
 
 % integer parsing util
 parseInt(Number) --> sign(S), digits(D), { D \= [] }, { number_codes(Number, [S|D]) }.
@@ -28,7 +28,8 @@ number(num(N)) --> parseInt(N), spaces.
 variable(var(Name)) --> ident(V), { string_chars(Name, V)}, spaces.
 
 %  function application node
-function(funApp(Name, Args)) --> ident(F), { string_chars(Name, F)}, ['('], arguments(Args), [')'], spaces.
+function(funApp(Name, Args)) --> ident(F), { string_chars(Name, F)}, 
+    ['('], arguments(Args), [')'], spaces.
 
 arguments([]) --> [].
 arguments([A|T]) --> expr(A), [','], arguments(T).
@@ -40,6 +41,9 @@ factor(T) --> function(T).
 factor(V) --> variable(V).
 factor(T) --> ['('], spaces, expr(T), [')'], spaces.
 
+% term non-terminal
+term(T) --> factor(T1), mulop(T1, T).
+
 % multiplication chain
 mulop(LeftExp, Tree) --> 
     [Op], { member(Op, ['*', '/']) }, spaces, 
@@ -47,8 +51,8 @@ mulop(LeftExp, Tree) -->
     mulop(NewExp, Tree).
 mulop(Tree, Tree) --> [].
 
-% term non-terminal
-term(T) --> factor(T1), mulop(T1, T).
+% expression non-terminal
+expr(T) --> term(T1), addop(T1, T).
 
 % addition chain
 addop(LeftExp, Tree) --> 
@@ -57,8 +61,5 @@ addop(LeftExp, Tree) -->
     addop(NewExp, Tree).
 addop(Tree, Tree) --> [].
 
-% expression non-terminal
-expr(T) --> term(T1), addop(T1, T).
-
 % full parse function
-parse(Input, Tree) :- string_chars(Input,Codes), expr(Tree,Codes,[]).
+parse(Input, Tree) :- string_chars(Input,Chars), expr(Tree,Chars,[]).
